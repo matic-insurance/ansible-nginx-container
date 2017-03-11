@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  become: yes
   roles:
     - role: ../..
       nginx_files_local_folder: './files'
