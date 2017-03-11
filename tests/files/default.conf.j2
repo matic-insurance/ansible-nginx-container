@@ -1,0 +1,11 @@
+server {
+  listen 80 default_server;
+
+  location / {
+    return 200 "Container working";
+  }
+  location /hello {
+    root /etc/certs;
+    try_files $uri /hello.html;
+  }
+}

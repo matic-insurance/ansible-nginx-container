@@ -4,24 +4,64 @@ nginx-container
 
 Role used to download, configure and run nginx-alpine container
 
+Requirements
+------------
+
+Ubuntu 14.04 is tested.
+
+This role uses Ansible's docker module, so requirements are [the same](https://docs.ansible.com/ansible/docker_image_module.html#requirements-on-host-that-executes-module).
+
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Here is the list of Required variables with default values:
+```yaml
+# Folder with all source files  on local machine
+nginx_files_local_folder: './files'
+# List of configuration files to be rendered into /etc/nginx/conf.d/ folder
+nginx_configuration_files: []
+# List of certificate files to be rendered into /etc/certs/
+nginx_certificate_files: []
+# List of nginx ports to be mapped
+nginx_ports_mapping: ['80:80']
+```
+These variables are optional and can be changed if needed
+```yaml
+#Name of the container when it's running
+nginx_container_name: nginx
+#Settings path where rendered nginx files will be located
+nginx_settings_path: '{{ ansible_user_dir }}/{{ nginx_container_name }}'
+#Container memory limit
+container_memory_limit: 256m
+# Docker repository image and tag
+nginx_docker_image: nginx
+nginx_docker_image_tag: 1-alpine
+```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No dependencies
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Simpliest playbook can be following:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: webservers
+  roles:
+    - role: nginx-container
+      nginx_files_local_folder: './files/nginx'
+      nginx_configuration_files: ['default.conf']
+```
+
+This playbook will run nginx container with name `nginx` on webserver hosts 
+and will render default.conf.j2 file from `./files/ngingx` into `/etc/nginx/conf.d` folder on container
+container will expose only 80 port
+ 
+Advanced playbook with certificates and multiple ports:
+
 
 License
 -------

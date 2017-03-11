@@ -1,2 +1,4 @@
 ---
-# handlers file for ansible-nginx-container
+- name: Restart nginx
+  shell: 'docker kill -s HUP {{ nginx_container_name }}'
+  when: nginx_container is defined and not nginx_container.changed
