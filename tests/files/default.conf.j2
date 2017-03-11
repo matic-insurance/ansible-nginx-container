@@ -1,7 +1,11 @@
 server {
   listen 80 default_server;
+  root /etc/certs;
 
   location / {
-    return 200 "hello world";
+    return 200 "ok";
+  }
+  location /hello {
+    rewrite (.*) hello.html break;
   }
 }
