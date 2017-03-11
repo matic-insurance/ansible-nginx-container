@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: all
   roles:
     - role: ../..
+      nginx_files_local_folder: './files'
+      nginx_configuration_files: ['default.conf']
