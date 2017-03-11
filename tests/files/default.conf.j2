@@ -1,11 +1,11 @@
 server {
   listen 80 default_server;
-  root /etc/certs;
 
   location / {
-    return 200 "ok";
+    return 200 "Container working";
   }
   location /hello {
-    rewrite (.*) hello.html break;
+    root /etc/certs;
+    try_files $uri /hello.html;
   }
 }
