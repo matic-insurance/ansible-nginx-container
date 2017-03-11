@@ -1,12 +1,8 @@
-Role Name
+nginx-container
 =========
+[![Build Status](https://travis-ci.org/matic-insurance/ansible-nginx-container.svg?branch=master)](https://travis-ci.org/matic-insurance/ansible-nginx-container)
 
-A brief description of the role goes here.
-
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Role used to download, configure and run nginx-alpine container
 
 Role Variables
 --------------
@@ -30,9 +26,9 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Matic is a communication platform that connects lenders and borrowers originating a new home loan. A borrower now knows where they are in the loan process and what they need to do to complete the loan.
