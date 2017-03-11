@@ -1,2 +1,10 @@
 ---
-# defaults file for ansible-nginx-container
+#Name of the container when it's running
+nginx_container_name: nginx
+
+#Container memory limit
+container_memory_limit: 256m
+
+# Docker repository image and tag
+nginx_docker_image: nginx
+nginx_docker_image_tag: 1-alpine
