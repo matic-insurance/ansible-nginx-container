@@ -27,7 +27,6 @@
     name: '{{ nginx_container_name }}'
     image: '{{ nginx_docker_image }}:{{ nginx_docker_image_tag }}'
     state: started
-    restart: true
     restart_policy: always
     memory: '{{ container_memory_limit }}'
     volumes:
