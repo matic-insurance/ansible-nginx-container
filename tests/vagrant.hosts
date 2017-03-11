@@ -1,10 +1,5 @@
-[travis]
-localhost
-
 [vagrant]
 ansible-test.local
-
-[travis:vars]
 
 [vagrant:vars]
 ansible_ssh_port=2255
