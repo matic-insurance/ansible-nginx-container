@@ -16,13 +16,9 @@ addons:
 install:
   # Install ansible
   - pip install ansible
-  - pip install setuptools==32.3.1
-  - pip install docker-py==1.10.6
 
   # Check ansible version
   - ansible --version
-  # Check docker-py version
-  - pip show docker-py
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../\nhost_key_checking = False' >ansible.cfg
