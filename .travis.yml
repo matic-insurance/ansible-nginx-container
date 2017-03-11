@@ -21,7 +21,7 @@ install:
   - ansible --version
 
   # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../\nhost_key_checking = False' >ansible.cfgx
+  - printf '[defaults]\nroles_path=../\nhost_key_checking = False' >ansible.cfg
 
 script:
   # Basic role syntax check
