@@ -3,6 +3,10 @@
   become: yes
   roles:
     - role: ../..
-      nginx_files_local_folder: './files'
-      nginx_configuration_files: ['default.conf']
-      nginx_certificate_files: ['hello.html']
+      nginx_configuration_files:
+        - src: './files/default.conf.j2'
+          dst: 'conf.d/default.conf'
+      nginx_other_files:
+        - src: './files/static/hello.html'
+          dst: '/etc/static/hello.html'
+          mode: 'ro'

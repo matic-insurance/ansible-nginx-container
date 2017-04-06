@@ -1,0 +1,11 @@
+---
+- name: 'Run: nginx container'
+  docker_container:
+    name: '{{ nginx_container_name }}'
+    image: '{{ nginx_docker_image }}:{{ nginx_docker_image_tag }}'
+    state: started
+    restart_policy: always
+    memory: '{{ container_memory_limit }}'
+    volumes: '{{ nginx_container_volumes }}'
+    ports: '{{ nginx_ports_mapping }}'
+  register: nginx_container
