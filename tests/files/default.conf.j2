@@ -5,7 +5,7 @@ server {
     return 200 "Container working";
   }
   location /hello {
-    root /etc/certs;
+    root /etc/static/;
     try_files $uri /hello.html;
   }
 }

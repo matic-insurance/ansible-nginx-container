@@ -1,36 +1,5 @@
 ---
-- name: Create nginx settings directory
-  file: path={{ nginx_settings_path }} state=directory
-
-- name: Create nginx configuration directory
-  file: path={{ nginx_settings_path }}/conf.d state=directory
-
-- name: Render config {{ item }}
-  template: src={{nginx_files_local_folder}}/{{ item }}.j2 dest={{ nginx_settings_path }}/conf.d/{{ item }}
-  with_items: '{{ nginx_configuration_files }}'
-  notify:
-    - Restart nginx
-
-- name: Create nginx certs directory
-  file: path={{ nginx_settings_path }}/certs state=directory
-
-- name: Render certificate {{ item }}
-  copy:
-    src: '{{nginx_files_local_folder}}/{{ item }}'
-    dest: '{{ nginx_settings_path }}/certs/{{ item }}'
-  with_items: '{{ nginx_certificate_files }}'
-  notify:
-    - Restart nginx
-
-- name: Run nginx server
-  docker_container:
-    name: '{{ nginx_container_name }}'
-    image: '{{ nginx_docker_image }}:{{ nginx_docker_image_tag }}'
-    state: started
-    restart_policy: always
-    memory: '{{ container_memory_limit }}'
-    volumes:
-      - '{{ nginx_settings_path }}/conf.d:/etc/nginx/conf.d:ro'
-      - '{{ nginx_settings_path }}/certs:/etc/certs:ro'
-    ports: '{{ nginx_ports_mapping }}'
-  register: nginx_container
+- include: _1_prepare_config_files.yml
+- include: _2_prepare_other_files.yml
+- include: _3_volumes_list.yml
+- include: _4_run_container.yml

@@ -16,12 +16,16 @@ Role Variables
 
 Here is the list of Required variables with default values:
 ```yaml
-# Folder with all source files  on local machine
-nginx_files_local_folder: './files'
-# List of configuration files to be rendered into /etc/nginx/conf.d/ folder
+# List of configuration files to be rendered as templates into /etc/nginx/ folder
+# - src: './files/default.conf.j2'
+#   dst: 'conf.d/default.conf'
+#   mode: 'ro' # optional
 nginx_configuration_files: []
-# List of certificate files to be rendered into /etc/certs/
-nginx_certificate_files: []
+# List of certificate files to be added to root / of container in format:
+# - src: './files/static/hello.html'
+#   dst: '/etc/static/hello.html'
+#   mode: 'ro' # optional
+nginx_other_files: []
 # List of nginx ports to be mapped
 nginx_ports_mapping: ['80:80']
 ```
@@ -52,15 +56,33 @@ Simpliest playbook can be following:
 - hosts: webservers
   roles:
     - role: nginx-container
-      nginx_files_local_folder: './files/nginx'
-      nginx_configuration_files: ['default.conf']
+      nginx_configuration_files:
+        - src: './files/default.conf.j2'
+          dst: 'conf.d/default.conf'
 ```
 
 This playbook will run nginx container with name `nginx` on webserver hosts 
 and will render default.conf.j2 file from `./files/ngingx` into `/etc/nginx/conf.d` folder on container
 container will expose only 80 port
  
-Advanced playbook with certificates and multiple ports:
+Advanced playbook with certificate files and multiple ports:
+```yaml
+- hosts: webservers
+  roles:
+    - role: nginx-container
+      nginx_container_name: 'application-nginx'
+      nginx_ports_mapping: 
+        - '80:80'
+        - '443:443'
+        - '88:80'
+      nginx_configuration_files:
+        - src: './files/default.conf.j2'
+          dst: 'conf.d/default.conf'
+      nginx_other_files:
+        - src: './files/certs/bundle.crt'
+          dst: '/etc/certs/bundle.crt'
+          mode: 'ro'
+```
 
 
 License
