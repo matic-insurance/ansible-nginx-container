@@ -1,5 +1,5 @@
 ---
-- include: _1_prepare_config_files.yml
-- include: _2_prepare_other_files.yml
-- include: _3_volumes_list.yml
-- include: _4_run_container.yml
+- import_tasks: _1_prepare_config_files.yml
+- import_tasks: _2_prepare_other_files.yml
+- import_tasks: _3_volumes_list.yml
+- import_tasks: _4_run_container.yml
