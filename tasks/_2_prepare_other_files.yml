@@ -3,7 +3,7 @@
   file:
     path: "{{ nginx_settings_path + '/other/' + item.dst | dirname }}"
     state: directory
-    recurse: yes
+    recurse: true
   with_items: '{{ nginx_other_files }}'
 
 - name: 'Configuration: Render other files'

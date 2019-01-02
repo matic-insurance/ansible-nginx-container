@@ -1,6 +1,6 @@
 ---
 ###########################################################################
-#Required settings
+# Required settings
 # List of configuration files to be rendered as templates into /etc/nginx/ folder
 # - src: './files/default.conf.j2'
 #   dst: 'conf.d/default.conf'
@@ -18,11 +18,11 @@ nginx_ports_mapping: ['80:80']
 
 ###########################################################################
 # Optional settings
-#Name of the container when it's running
+# Name of the container when it's running
 nginx_container_name: nginx
-#Settings path where rendered nginx files will be located
+# Settings path where rendered nginx files will be located
 nginx_settings_path: '{{ ansible_user_dir }}/{{ nginx_container_name }}'
-#Container memory limit
+# Container memory limit
 container_memory_limit: 256m
 # Docker repository image and tag
 nginx_docker_image: nginx
