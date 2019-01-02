@@ -15,6 +15,7 @@ addons:
 
 install:
   # Install ansible
+  - pip uninstall docker
   - pip install ansible==2.5.6
   - pip install setuptools==32.3.1
   - pip install docker-py==1.10.6
