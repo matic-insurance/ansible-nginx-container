@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: nginx_container
   author: Volodymyr Mykhailyk
   description: Download, configure and run nginx-alpine container
   company: matic-insurance
