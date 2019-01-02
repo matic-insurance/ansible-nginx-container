@@ -19,6 +19,7 @@ install:
   - pip install setuptools==32.3.1
   - pip install docker-py==1.10.6
   - pip install yamllint==1.11.1
+  - pip install ansible-lint==3.4.23
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../\nhost_key_checking = False' >ansible.cfg
@@ -26,6 +27,9 @@ install:
 script:
   # Lint YAML files
   - yamllint .
+
+  # Lint Ansible files
+  - ansible-lint tests/test.yml
 
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/travis.hosts --syntax-check --connection=local
