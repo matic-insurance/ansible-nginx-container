@@ -1,0 +1,16 @@
+---
+- hosts: travis
+  become: yes
+  tasks:
+    - pip:
+        name: setuptools
+        version: 32.3.1
+    - pip:
+        name: docker-py
+        version: 1.10.6
+    - pip:
+        name: yamllint
+        version: 1.11.1
+    - pip:
+        name: ansible-lint
+        version: 3.4.23
