@@ -4,6 +4,11 @@ server {
   location / {
     return 200 "Container working";
   }
+
+  location /params {
+    return 200 "Container params - {{ test_param|default('none') }}";
+  }
+
   location /hello {
     root /etc/static/;
     try_files $uri /hello.html;

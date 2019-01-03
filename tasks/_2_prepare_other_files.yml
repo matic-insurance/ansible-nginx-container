@@ -1,16 +1,8 @@
 ---
-- name: 'Configuration: Render other directories'
+- name: 'Configuration: Render mounted directories'
   file:
-    path: "{{ nginx_settings_path + '/other/' + item.dst | dirname }}"
+    path: "{{ item.src | dirname }}"
     state: directory
     recurse: true
-  with_items: '{{ nginx_other_files }}'
-
-- name: 'Configuration: Render other files'
-  template:
-    src: '{{ item.src }}'
-    dest: '{{ nginx_settings_path }}/other/{{ item.dst }}'
-  with_items: '{{ nginx_other_files }}'
-  register: nginx_other_files_status
-  notify:
-    - Restart nginx
+  with_items: '{{ nginx_mounted_folders }}'
+  register: nginx_mounted_folders_status

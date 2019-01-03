@@ -5,8 +5,8 @@
     - role: ../..
       nginx_configuration_files:
         - src: './files/default.conf.j2'
-          dst: 'conf.d/default.conf'
-      nginx_other_files:
-        - src: './files/static/hello.html'
-          dst: '/etc/static/hello.html'
+          dst: 'default.conf'
+      nginx_mounted_folders:
+        - src: '/tmp/static_files_test'
+          dst: '/etc/static'
           mode: 'ro'

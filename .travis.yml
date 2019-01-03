@@ -26,8 +26,6 @@ install:
 script:
   # Lint YAML files
   - yamllint .
-
-  # Lint Ansible files
   - ansible-lint tests/test.yml
 
   # Basic role syntax check
@@ -36,15 +34,24 @@ script:
 
   # Run role
   - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local
-  # Check if container running
-  - docker inspect nginx | grep -q "Status.*running"
-  # Check if container returning statis response
-  - curl "http://localhost/" | grep -q "Container working"
-  # Check if container serve files
-  - curl "http://localhost/hello" | grep -q "Container working"
 
   # Run Idempotent test
   - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local | grep -q 'changed=0.*failed=0'
+
+  # Check if container running
+  - docker inspect nginx | grep -q "Status.*running"
+  - curl "http://localhost/" | grep -q "Container working"
+  - curl "http://localhost/params" | grep -q "Container params - none"
+  - curl "http://localhost/hello" | grep -q "Container working"
+
+  # Apply new config
+  - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local --extra-vars "test_param=new_version"
+
+  # Check if container returning all responses
+  - docker inspect nginx | grep -q "Status.*running"
+  - curl "http://localhost/" | grep -q "Container working"
+  - curl "http://localhost/params" | grep -q "Container params - new_version"
+  - curl "http://localhost/hello" | grep -q "Container working"
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
