@@ -11,19 +11,25 @@ services:
 addons:
   apt:
     packages:
-    - python-pip
+      - python-pip
 
 install:
   # Install ansible
-  - pip install ansible
+  - pip install ansible==2.5.6
 
-  # Install ansible dependencies
+  # Install all dependencies
   - ansible-playbook tests/setup.yml -i tests/travis.hosts --connection=local
 
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../\nhost_key_checking = False' >ansible.cfg
 
 script:
+  # Lint YAML files
+  - yamllint .
+
+  # Lint Ansible files
+  - ansible-lint tests/test.yml
+
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/travis.hosts --syntax-check --connection=local
   - ansible-playbook tests/test.yml -i tests/travis.hosts --check --connection=local
