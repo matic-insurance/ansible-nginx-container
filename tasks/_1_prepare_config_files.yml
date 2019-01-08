@@ -1,7 +1,7 @@
 ---
 - name: 'Configuration: Render config directories'
   file:
-    path: "{{ nginx_settings_path + '/configs/' + item.dst | dirname }}"
+    path: "{{ nginx_settings_path + '/conf.d/' + item.dst | dirname }}"
     state: directory
     recurse: true
   with_items: '{{ nginx_configuration_files }}'
@@ -9,7 +9,7 @@
 - name: 'Configuration: Render config files'
   template:
     src: '{{ item.src }}'
-    dest: '{{ nginx_settings_path }}/configs/{{ item.dst }}'
+    dest: '{{ nginx_settings_path }}/conf.d/{{ item.dst }}'
   with_items: '{{ nginx_configuration_files }}'
   register: nginx_config_files_status
   notify:

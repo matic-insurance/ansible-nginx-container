@@ -4,14 +4,13 @@
     nginx_container_volumes: []
   changed_when: false
 
-- name: 'Configuration: Prepare config files volumes list'
+- name: 'Configuration: Prepare config files volumes'
   set_fact:
-    nginx_container_volumes: "{{ nginx_container_volumes + [ nginx_settings_path + '/configs/' + item.dst + ':/etc/nginx/' + item.dst + ':' + item.mode|default('ro')  ] }}"
-  with_items: '{{ nginx_configuration_files }}'
+    nginx_container_volumes: "{{ nginx_container_volumes + [ nginx_settings_path + '/conf.d:/etc/nginx/conf.d:ro'  ] }}"
   changed_when: nginx_config_files_status.changed
 
-- name: 'Configuration: Prepare other files volumes list'
+- name: 'Configuration: Prepare mounted folders volumes list'
   set_fact:
-    nginx_container_volumes: "{{ nginx_container_volumes + [ nginx_settings_path + '/other/' + item.dst + ':' + item.dst + ':' + item.mode|default('ro')  ] }}"
-  with_items: '{{ nginx_other_files }}'
-  changed_when: nginx_other_files_status.changed
+    nginx_container_volumes: "{{ nginx_container_volumes + [ item.src + ':' + item.dst + ':' + item.mode|default('ro')  ] }}"
+  with_items: '{{ nginx_mounted_folders }}'
+  changed_when: nginx_mounted_folders_status.changed

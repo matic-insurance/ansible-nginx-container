@@ -1,6 +1,6 @@
 ---
 - hosts: travis
-  become: yes
+  become: true
   tasks:
     - pip:
         name: setuptools
@@ -14,3 +14,7 @@
     - pip:
         name: ansible-lint
         version: 3.4.23
+    - name: 'Sync static files'
+      copy:
+        src: './files/static/'
+        dest: '/tmp/static_files_test/'
