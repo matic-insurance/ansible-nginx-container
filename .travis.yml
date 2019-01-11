@@ -47,7 +47,7 @@ script:
   - curl "http://localhost/hello" | grep -q "Container working"
 
   # Apply new config
-  - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local --extra-vars "test_param=new_version"
+  - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local --extra-vars "test_param=new_version" -vvv
 
   # Check if container returning all responses
   - docker inspect nginx | grep -q "Status.*running"
