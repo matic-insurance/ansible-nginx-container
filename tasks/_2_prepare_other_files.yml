@@ -12,4 +12,3 @@
     dest: "{{ nginx_settings_path + item.dst }}"
   with_items: '{{ nginx_mounted_folders }}'
   register: nginx_mounted_folders_status
-  
