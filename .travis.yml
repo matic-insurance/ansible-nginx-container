@@ -40,7 +40,6 @@ script:
 
   # Check if container running
   - docker inspect nginx | grep -q "Status.*running"
-  - docker version
   - docker ps
   - docker exec -it nginx df
   - docker exec -it nginx cat /etc/nginx/conf.d/default.conf
@@ -48,12 +47,13 @@ script:
   - res=$(curl http://localhost/params); echo $res #| grep -q "Container params - none"
   - curl "http://localhost/hello" | grep -q "Container working"
 
+  - sleep 60
+
   # Apply new config
-  - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local --extra-vars "test_param=new_version" -vvv
+  - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local --extra-vars "test_param=new_version"
 
   # Check if container returning all responses
   - docker inspect nginx | grep -q "Status.*running"
-  - docker version
   - docker ps
   - docker exec -it nginx df
   - docker exec -it nginx cat /etc/nginx/conf.d/default.conf
