@@ -7,6 +7,6 @@
         - src: './files/default.conf.j2'
           dst: 'default.conf'
       nginx_mounted_folders:
-        - src: '/tmp/static_files_test'
+        - src: '/tmp/static_files_test/'
           dst: '/etc/static'
           mode: 'ro'

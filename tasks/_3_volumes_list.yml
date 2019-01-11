@@ -11,6 +11,6 @@
 
 - name: 'Configuration: Prepare mounted folders volumes list'
   set_fact:
-    nginx_container_volumes: "{{ nginx_container_volumes + [ item.src + ':' + item.dst + ':' + item.mode|default('ro')  ] }}"
+    nginx_container_volumes: "{{ nginx_container_volumes + [ nginx_settings_path + item.dst + ':' + item.dst + ':' + item.mode|default('ro')  ] }}"
   with_items: '{{ nginx_mounted_folders }}'
   changed_when: nginx_mounted_folders_status.changed

@@ -1,8 +1,14 @@
 ---
 - name: 'Configuration: Render mounted directories'
   file:
-    path: "{{ item.src | dirname }}"
+    path: "{{ nginx_settings_path + item.dst | dirname }}"
     state: directory
     recurse: true
+  with_items: '{{ nginx_mounted_folders }}'
+
+- name: 'Configuration: Copy mounted directories'
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ nginx_settings_path + item.dst }}"
   with_items: '{{ nginx_mounted_folders }}'
   register: nginx_mounted_folders_status

@@ -21,11 +21,11 @@ Here is the list of Required variables with default values:
 #   dst: 'conf.d/default.conf'
 #   mode: 'ro' # optional
 nginx_configuration_files: []
-# List of certificate files to be added to root / of container in format:
-# - src: './files/static/hello.html'
-#   dst: '/etc/static/hello.html'
+# List of folders to be mounted to the nginx from host:
+# - src: '/var/www/static_site/'
+#   dst: '/etc/static'
 #   mode: 'ro' # optional
-nginx_other_files: []
+nginx_mounted_folders: []
 # List of nginx ports to be mapped
 nginx_ports_mapping: ['80:80']
 ```
@@ -78,9 +78,9 @@ Advanced playbook with certificate files and multiple ports:
       nginx_configuration_files:
         - src: './files/default.conf.j2'
           dst: 'conf.d/default.conf'
-      nginx_other_files:
-        - src: './files/certs/bundle.crt'
-          dst: '/etc/certs/bundle.crt'
+      nginx_mounted_folders:
+        - src: './files/certs/'
+          dst: '/etc/certs'
           mode: 'ro'
 ```
 

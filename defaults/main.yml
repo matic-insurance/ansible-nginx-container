@@ -7,7 +7,7 @@
 nginx_configuration_files: []
 
 # List of folders to be mounted to the nginx from host:
-# - src: '/var/www/static_site'
+# - src: '/var/www/static_site/'
 #   dst: '/etc/static'
 #   mode: 'ro' # optional
 nginx_mounted_folders: []

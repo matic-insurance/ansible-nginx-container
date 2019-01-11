@@ -3,5 +3,4 @@
   docker_container:
     name: '{{ nginx_container_name }}'
     kill_signal: 'HUP'
-    restart: true
   when: nginx_container is defined and not nginx_container.changed
