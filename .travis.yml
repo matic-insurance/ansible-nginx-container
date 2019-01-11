@@ -48,10 +48,10 @@ script:
   - curl "http://localhost/hello" | grep -q "Container working"
 
  # - sleep 60
-  - docker kill --signal HUP nginx
 
   # Apply new config
   - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local --extra-vars "test_param=new_version"
+  - docker kill --signal HUP nginx
 
   # Check if container returning all responses
   - docker inspect nginx | grep -q "Status.*running"
