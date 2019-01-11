@@ -47,7 +47,8 @@ script:
   - res=$(curl http://localhost/params); echo $res #| grep -q "Container params - none"
   - curl "http://localhost/hello" | grep -q "Container working"
 
-  - sleep 60
+ # - sleep 60
+  - docker kill --signal HUP nginx
 
   # Apply new config
   - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local --extra-vars "test_param=new_version"
