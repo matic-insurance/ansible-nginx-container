@@ -41,7 +41,7 @@ script:
   # Check if container running
   - docker inspect nginx | grep -q "Status.*running"
   - curl "http://localhost/" | grep -q "Container working"
-  - curl "http://localhost/params" #| grep -q "Container params - none"
+  - curl -vi "http://localhost/params" #| grep -q "Container params - none"
   - curl "http://localhost/hello" | grep -q "Container working"
 
   # Apply new config
@@ -50,7 +50,7 @@ script:
   # Check if container returning all responses
   - docker inspect nginx | grep -q "Status.*running"
   - curl "http://localhost/" | grep -q "Container working"
-  - curl "http://localhost/params" # | grep -q "Container params - new_version"
+  - curl -vi "http://localhost/params" # | grep -q "Container params - new_version"
   - curl "http://localhost/hello" | grep -q "Container working"
 
 notifications:
