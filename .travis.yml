@@ -47,6 +47,7 @@ script:
   # Apply new config
   - ansible-playbook tests/test.yml -i tests/travis.hosts --connection=local --extra-vars "test_param=new_version"
 
+
   # Check if container returning all responses
   - docker kill -s HUP nginx
   - docker inspect nginx | grep -q "Status.*running"
