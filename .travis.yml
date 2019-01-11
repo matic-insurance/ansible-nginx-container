@@ -40,6 +40,8 @@ script:
 
   # Check if container running
   - docker inspect nginx | grep -q "Status.*running"
+  - docker exec -it nginx df
+  - docker exec -it nginx cat /etc/nginx/conf.d/default.conf
   - curl "http://localhost/" | grep -q "Container working"
   - res=$(curl http://localhost/params); echo $res #| grep -q "Container params - none"
   - curl "http://localhost/hello" | grep -q "Container working"
@@ -49,6 +51,8 @@ script:
 
   # Check if container returning all responses
   - docker inspect nginx | grep -q "Status.*running"
+  - docker exec -it nginx df
+  - docker exec -it nginx cat /etc/nginx/conf.d/default.conf
   - curl "http://localhost/" | grep -q "Container working"
   - res=$(curl http://localhost/params); echo $res # | grep -q "Container params - new_version"
   - curl "http://localhost/hello" | grep -q "Container working"
