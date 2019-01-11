@@ -41,7 +41,7 @@ script:
   # Check if container running
   - docker inspect nginx | grep -q "Status.*running"
   - curl "http://localhost/" | grep -q "Container working"
-  - curl "http://localhost/params" | grep -q "Container params - none"
+  - curl -v "http://localhost/params" #| grep -q "Container params - none"
   - curl "http://localhost/hello" | grep -q "Container working"
 
   # Apply new config
