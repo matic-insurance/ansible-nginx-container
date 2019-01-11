@@ -51,9 +51,9 @@ script:
   - docker kill -s HUP nginx
   - docker inspect nginx | grep -q "Status.*running"
   - curl "http://localhost/" | grep -q "Container working"
+  - res=$(curl http://localhost/params); echo $res
   - curl "http://localhost/params" | grep -q "Container params - new_version"
   - curl "http://localhost/hello" | grep -q "Container working"
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
-  
